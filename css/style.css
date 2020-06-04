@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#storeLocator {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+}
+
+#search {
+    height: 25px;
+    width: 320px;
+    padding: 11px;
+    background-color: rgb(243, 236, 236);
+    border-radius: 15px;
+}
+
+input {
+    border: none;
+    color: black;
+    width: 260px;
+    padding-left: 10px;
+    background-color: rgb(243, 236, 236);
+    outline: none;
+    font-size: medium;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+}
+
+.img {
+    float: right;
+}
+
+#container {
+    height: 400px;
+    width: 320px;
+    padding: 10px;
+    padding-bottom: 0px;
+    background-color: azure;
+    border-radius: 10px;
+    margin-top: 5px;
+    overflow: scroll;
+}
+
+
+/* width */
+
+ ::-webkit-scrollbar {
+    width: 5px;
+    border: none;
+    height: 0px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    display: none;
+    margin-top: 20px;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 100px;
+    margin-top: 20px;
+}
+
+ ::-webkit-scrollbar-bottom {
+    display: none;
+}
+
+.list {
+    display: inline-flex;
+    border-bottom: 1px solid black;
+}
+
+.address {
+    font-size: 18px;
+    width: 250px;
+    padding: 10px;
+}
+
+.number {
+    float: right;
+    width: 27px;
+    height: 25px;
+    border-radius: 13px;
+    background-color: slategray;
+    text-align: center;
+    margin: 20px 0px 0px 12px;
+    padding-top: 3px;
+}
+
+#phone {
+    color: gray;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+#se {
+    border: none;
+    outline: none;
+    width: 20px;
+    height: 20px;
+}

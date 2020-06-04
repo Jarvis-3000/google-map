@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- style link -->
+    <link rel="stylesheet" href="style\style.css">
+    <!-- javscript links -->
+    <script src="js/store-data.js"></script>
+    <script src="js/display.js"></script>
+    <script src="js/addStores.js"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <script src="storeLocatorDisplay.js"></script>
+    <!-- start -->
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #bt {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <button id="bt" onclick="dikhao(this)">search</button>
+    <div id="storeLocator" style="display:none">
+
+        <div id="search">
+            <input type="text" placeholder="Enter-Zip">
+            <span class="img"><button id="se" onclick="displayStores()"><img src="images\Search.png"></button></span>
+        </div>
+
+        <div id="container" onclick="displayClickList(event)">
+
+        </div>
+    </div>
+
+
+    <script>
+        var i = 0;
+        window.onload(addStores());
+
+        var Ad = document.getElementById("container");
+        var street = Add.split(",");
+        var map;
+        var infoWindow;
+        var markers = [];
+        var i = 0;
+
+        // first display map after loading
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: new google.maps.LatLng(34.063584, -118.376354),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            showMarkers();
+        }
+
+        function showMarkers() {
+
+            var marker;
+
+            //add infowindow 
+            var bounds = new google.maps.LatLngBounds();
+            //add markers
+            for (var store in stores) {
+                var center = new google.maps.LatLng(stores[store].coordinates.latitude, stores[store].coordinates.longitude);
+                bounds.extend(center);
+                createMarkers(center, store, store);
+            }
+            map.fitBounds(bounds);
+        }
+
+        function createMarkers(center, store, index) {
+            marker = new google.maps.Marker({
+                //position is essential no option (center)
+                position: center,
+                map: map,
+                title: stores[index].addressLines[1],
+                label: (++store).toString()
+            });
+            markerClick(store);
+            //    markers.push(marker);
+
+        }
+
+        function markerClick(store) {
+
+            marker.addListener('click', function() {
+                //alert(this.getPosition() + " " + this.label);
+                // map.setZoom(16);
+                infoWindow = new google.maps.InfoWindow({
+                    content: stores[store].addressLines[0] + "<br>" + stores[store].addressLines[1],
+                    maxWidth: 300
+
+                });
+                infoWindow.open(map, this);
+
+                setTimeout(function() {
+                    infoWindow.close();
+                }, 2000);
+                //infoWindow.close();
+                // map.setZoom(20);
+                // map.setCenter(this.getPosition());
+            });
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=yourAPIkey&callback=initMap" async defer></script>
+</body>
+
+</html>
